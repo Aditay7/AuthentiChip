@@ -1,0 +1,7 @@
+fastapi
+motor
+pydantic-settings
+passlib[bcrypt]
+uvicorn
+motor
+pydantic-settings
