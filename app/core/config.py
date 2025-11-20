@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     UVICORN_WORKERS: int = Field(default=1, validation_alias=AliasChoices("UVICORN_WORKERS", "uvicorn_workers"))
 
 
+
 @lru_cache()
 def get_settings() -> Settings:
     return Settings()
