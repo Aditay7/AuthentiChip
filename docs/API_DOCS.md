@@ -34,9 +34,21 @@ Base URL: `http://localhost:8000/api/v1`
 ```json
 {
   "access_token": "jwt_token_string",
-  "token_type": "bearer"
+  "token_type": "bearer",
+  "user": {
+    "id": "66519f...",
+    "email": "user@example.com",
+    "name": "Worker One",
+    "role": "worker",
+    "organization": "Factory A"
+  }
 }
 ```
+- **Notes**
+  - The `role` field in the response is critical for frontend routing
+  - Use `role` to redirect to the appropriate dashboard:
+    - `"admin"` → Admin Dashboard
+    - `"worker"` → Worker Dashboard
 
 ### Me (Protected)
 - **GET** `/auth/me`

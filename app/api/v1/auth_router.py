@@ -33,5 +33,13 @@ async def login(user_in: UserLogin, service: AuthService = Depends(get_auth_serv
 
 @router.get("/me", response_model=UserOut)
 async def me(current_user: dict = Depends(get_current_user)) -> UserOut:
-    return UserOut(id=current_user["id"], email=current_user["email"])
+    return UserOut(
+        id=current_user["id"],
+        email=current_user["email"],
+        name=current_user.get("name"),
+        role=current_user.get("role", "worker"),
+        contact=current_user.get("contact"),
+        organization=current_user.get("organization"),
+        last_active=current_user.get("last_active"),
+    )
 

@@ -36,7 +36,7 @@ class AuthService:
             last_active=created.get("last_active"),
         )
 
-    async def login(self, payload: UserLogin) -> Dict[str, str]:
+    async def login(self, payload: UserLogin) -> Dict[str, object]:
         user = await self.repo.get_by_email(payload.email)
         if not user:
             raise ValueError("Invalid credentials")
@@ -47,5 +47,17 @@ class AuthService:
 
         await self.repo.update_last_active(str(user["_id"]))
         token = create_access_token(str(user["_id"]))
-        return {"access_token": token, "token_type": "bearer"}
+        
+        # Return token along with user info including role for frontend routing
+        return {
+            "access_token": token,
+            "token_type": "bearer",
+            "user": {
+                "id": str(user["_id"]),
+                "email": user["email"],
+                "name": user.get("name"),
+                "role": user.get("role", "worker"),  # Critical for dashboard routing
+                "organization": user.get("organization"),
+            }
+        }
 
