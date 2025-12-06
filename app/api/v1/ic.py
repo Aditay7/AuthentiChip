@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from app.db.client import get_database
-from app.models.ic import ICRecordCreate, ICRecordOut, ICRecordUpdate
+from app.models.ic_database import ICRecordCreate, ICRecordOut, ICRecordUpdate
 from app.repositories.ic_repository import ICRepository
 
 router = APIRouter(prefix="/ic", tags=["ic"])

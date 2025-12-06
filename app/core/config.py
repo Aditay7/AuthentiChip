@@ -24,6 +24,10 @@ class Settings(BaseSettings):
     APP_HOST: str = Field(default="0.0.0.0", validation_alias=AliasChoices("APP_HOST", "app_host"))
     APP_PORT: int = Field(default=8000, validation_alias=AliasChoices("APP_PORT", "app_port"))
     UVICORN_WORKERS: int = Field(default=1, validation_alias=AliasChoices("UVICORN_WORKERS", "uvicorn_workers"))
+    
+    # Image upload settings
+    UPLOAD_DIR: str = Field(default="uploads", validation_alias=AliasChoices("UPLOAD_DIR", "upload_dir"))
+    MAX_UPLOAD_SIZE_MB: int = Field(default=10, validation_alias=AliasChoices("MAX_UPLOAD_SIZE_MB", "max_upload_size_mb"))
 
 
 
