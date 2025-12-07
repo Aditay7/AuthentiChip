@@ -25,9 +25,7 @@ class ICImageData(BaseModel):
 
 class ICRecordBase(BaseModel):
     manufacturer: str
-    base_part_number: str
-
-    full_part_numbers: List[str] = Field(default_factory=list)
+    full_part_number: str
     allowed_markings: List[str] = Field(default_factory=list)
 
     package_type: str
@@ -48,8 +46,7 @@ class ICRecordCreate(ICRecordBase):
 class ICRecordUpdate(BaseModel):
     """Used for partial updates via PATCH endpoint"""
     manufacturer: Optional[str] = None
-    base_part_number: Optional[str] = None
-    full_part_numbers: Optional[List[str]] = None
+    full_part_number: Optional[str] = None
     allowed_markings: Optional[List[str]] = None
     package_type: Optional[str] = None
     package_dimensions: Optional[PackageDimensions] = None

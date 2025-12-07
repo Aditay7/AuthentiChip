@@ -28,6 +28,10 @@ class Settings(BaseSettings):
     # Image upload settings
     UPLOAD_DIR: str = Field(default="uploads", validation_alias=AliasChoices("UPLOAD_DIR", "upload_dir"))
     MAX_UPLOAD_SIZE_MB: int = Field(default=10, validation_alias=AliasChoices("MAX_UPLOAD_SIZE_MB", "max_upload_size_mb"))
+    
+    # Gemini AI settings
+    GEMINI_API_KEY: Optional[str] = Field(default=None, validation_alias=AliasChoices("GEMINI_API_KEY", "gemini_api_key"))
+
 
 
 

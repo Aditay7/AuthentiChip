@@ -53,6 +53,10 @@ class ICRepository:
         await self.collection.update_one({"_id": db_id}, {"$set": clean_updates})
         return await self.get_by_id(ic_id)
 
+    async def search_by_full_part_number(self, full_part_number: str) -> Optional[Dict[str, Any]]:
+        """Search for IC record by full part number"""
+        return await self.collection.find_one({"full_part_number": full_part_number})
+
     async def delete(self, ic_id: str) -> bool:
         """Delete IC record by ID"""
         db_id = self._to_object_id(ic_id)

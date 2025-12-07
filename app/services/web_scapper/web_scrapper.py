@@ -12,11 +12,20 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from fastapi.middleware.cors import CORSMiddleware
 from collections import OrderedDict
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # ---------------------------------------------------
 # GEMINI INIT
 # ---------------------------------------------------
-genai.configure(api_key="AIzaSyD3I9at3bOf_3TLTyIPw79GkEJzcZYJUA4")
+# Load API key from environment variable
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY environment variable is not set. Please add it to your .env file.")
+
+genai.configure(api_key=GEMINI_API_KEY)
 GEMINI_MODEL = genai.GenerativeModel("gemini-2.5-flash")  # or "gemini-2.0-flash"
 
 GEMINI_PROMPT = """
@@ -35,8 +44,7 @@ CRITICAL INSTRUCTIONS:
 TASK:
 From the IC datasheet, extract:
 - Manufacturer name
-- Base part number (without package suffix)
-- Full part numbers (all variants)
+- Full part numbers
 - Allowed chip markings
 - Package type (e.g., DIP-20, PDIP-16, SOIC-16, etc.)
 - Mechanical dimensions for that SINGLE package:
@@ -46,8 +54,7 @@ From the IC datasheet, extract:
 Example output (EXACTLY this structure):
 {
   "manufacturer": "Texas Instruments",
-  "base_part_number": "SN74HCT257",
-  "full_part_numbers": ["SN74HCT257N", "SN74HCT257NE4"],
+  "full_part_numbers": "SN74HCT257NE4",
   "allowed_markings": ["SN74HCT257N"],
   "package_type": "PDIP-16",
   "package_dimensions": {
