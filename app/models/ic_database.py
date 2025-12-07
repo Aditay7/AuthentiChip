@@ -33,11 +33,6 @@ class ICRecordBase(BaseModel):
     package_dimensions: Optional[PackageDimensions] = None
     image_data: Optional[ICImageData] = None
 
-    dimensions_match: bool = False
-    texture_model_confidence_score: int = 0
-    overall_confidence_score: int = 0
-
-
 class ICRecordCreate(ICRecordBase):
     """Used for request body while creating new record"""
     pass
@@ -51,9 +46,6 @@ class ICRecordUpdate(BaseModel):
     package_type: Optional[str] = None
     package_dimensions: Optional[PackageDimensions] = None
     image_data: Optional[ICImageData] = None
-    dimensions_match: Optional[bool] = None
-    texture_model_confidence_score: Optional[int] = None
-    overall_confidence_score: Optional[int] = None
 
 
 class ICRecordOut(ICRecordBase):
