@@ -12,20 +12,21 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from fastapi.middleware.cors import CORSMiddleware
 from collections import OrderedDict
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+# Load settings
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from app.core.config import get_settings
 
 # ---------------------------------------------------
 # GEMINI INIT
 # ---------------------------------------------------
-# Load API key from environment variable
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-if not GEMINI_API_KEY:
-    raise ValueError("GEMINI_API_KEY environment variable is not set. Please add it to your .env file.")
+settings = get_settings()
+if not settings.GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY not found in environment variables. Please add it to your .env file.")
 
-genai.configure(api_key=GEMINI_API_KEY)
+genai.configure(api_key=settings.GEMINI_API_KEY)
 GEMINI_MODEL = genai.GenerativeModel("gemini-2.5-flash")  # or "gemini-2.0-flash"
 
 GEMINI_PROMPT = """
