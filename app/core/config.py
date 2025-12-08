@@ -31,6 +31,12 @@ class Settings(BaseSettings):
     
     # Gemini AI settings
     GEMINI_API_KEY: Optional[str] = Field(default=None, validation_alias=AliasChoices("GEMINI_API_KEY", "gemini_api_key"))
+    
+    # Raspberry Pi Camera settings
+    PI_CAPTURE_URL: str = Field(
+        default="http://172.17.18.197:5500/snapshot",
+        validation_alias=AliasChoices("PI_CAPTURE_URL", "pi_capture_url")
+    )
 
 
 

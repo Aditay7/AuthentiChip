@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1.auth_router import router as auth_router
 from app.api.v1.extract import router as extract_router
 from app.api.v1.ic import router as ic_router
+from app.api.v1.scan import router as scan_router
 from app.core.config import get_settings
 from app.db.client import close_client, connect_client, get_database
 
@@ -35,6 +36,7 @@ app.add_middleware(
 app.include_router(auth_router, prefix="/api/v1")
 app.include_router(extract_router, prefix="/api/v1")
 app.include_router(ic_router, prefix="/api/v1")
+app.include_router(scan_router, prefix="/api/v1")
 
 
 @app.get("/")
